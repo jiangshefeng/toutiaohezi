@@ -4,7 +4,13 @@ import '../style/index.less'
 
 Vue.use(VueRouter)
 
-const routes = []
+const routes = [
+  {
+    path: '/login',
+    component: () => import('@/views/login/login.vue'),
+    name: 'login'
+  }
+]
 
 const router = new VueRouter({
   routes
