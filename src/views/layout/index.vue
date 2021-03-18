@@ -38,17 +38,17 @@ export default {
     AppAside
   },
   props: [],
-  data() {
+  data () {
     return {
       user: {}
     }
   },
   methods: {
-    async getUserProfile() {
+    async getUserProfile () {
       await getUserInfo()
       this.user = JSON.parse(sessionStorage.getItem('userInfo'))
     },
-    async onLogout() {
+    async onLogout () {
       const res = await this.$confirm('即将退出, 是否继续?', '退出提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -66,7 +66,7 @@ export default {
       }
     }
   },
-  created() {
+  created () {
     this.getUserProfile()
   }
 }
@@ -108,5 +108,6 @@ export default {
 }
 .layout_main {
   height: 100vh;
+  padding-bottom: 40px;
 }
 </style>
