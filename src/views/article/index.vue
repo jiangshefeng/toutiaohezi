@@ -13,7 +13,6 @@
             <el-radio label="1">待审核</el-radio>
             <el-radio label="2">审核通过</el-radio>
             <el-radio label="3">审核失效</el-radio>
-            <el-radio label="4">已删除</el-radio>
           </el-radio-group>
         </el-form-item>
 
