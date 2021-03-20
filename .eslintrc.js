@@ -8,6 +8,9 @@ module.exports = {
     parser: 'babel-eslint'
   },
   rules: {
-    camelcase: 0
+    camelcase: 0,
+    'space-before-function-paren': 0,
+    eqeqeq: 0,
+    'dot-notation': 0
   }
 }

@@ -87,6 +87,7 @@
               type="primary"
               circle
               size="small "
+              @click="editEvent(props.row.id)"
             ></el-button>
             <el-button
               icon="el-icon-delete"
@@ -117,7 +118,7 @@ import { getArticleInfo, getArticleChannel, removeArticle } from '@/api/article'
 export default {
   name: 'ArtcleIndex',
   props: [],
-  data () {
+  data() {
     return {
       articleData: [],
       articleStatus: [
@@ -138,11 +139,11 @@ export default {
   },
   methods: {
     // 回退
-    goBack () {
+    goBack() {
       this.$router.go(-1)
     },
     // 加载文章
-    async loadArticle (page = 1) {
+    async loadArticle(page = 1) {
       this.loading = true
       const res = await getArticleInfo({
         page: page,
@@ -159,20 +160,20 @@ export default {
       this.loading = false
     },
     // 分页
-    handlePageChange (page) {
+    handlePageChange(page) {
       this.loadArticle(page)
     },
     // 查询文章
-    queryArticle () {
+    queryArticle() {
       this.loadArticle()
     },
     // 获取频道
-    async getChanle () {
+    async getChanle() {
       const res = await getArticleChannel()
       this.channels = res.data.data.channels
     },
     // 删除文章
-    async deleteArticle (id) {
+    async deleteArticle(id) {
       const res = await this.$confirm(
         '此操作将永久删除该文章, 是否继续?',
         '提示',
@@ -186,9 +187,13 @@ export default {
         await removeArticle(id.toString())
         await this.loadArticle(this.page)
       }
+    },
+    // 修改文章
+    editEvent(id) {
+      this.$router.push(`/publish?id=${id}`)
     }
   },
-  created () {
+  created() {
     this.loadArticle()
     this.getChanle()
   },
