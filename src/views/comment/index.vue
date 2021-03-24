@@ -84,7 +84,7 @@ export default {
     // 控制评论开关
     async controlComments(comment) {
       comment.statusDisabled = true
-      await updateCommentStatus(comment.id, comment.comment_status)
+      await updateCommentStatus(comment.id.toString(), comment.comment_status)
       comment.statusDisabled = false
     },
     // 换页操作
