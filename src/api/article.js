@@ -46,3 +46,16 @@ export function getArticleById(id) {
     method: 'get'
   })
 }
+// 修改文章评论状态
+export function updateCommentStatus(id, commentStatus) {
+  return request({
+    url: '/mp/v1_0/comments/status',
+    method: 'put',
+    params: {
+      article_id: id
+    },
+    data: {
+      allow_comment: commentStatus
+    }
+  })
+}

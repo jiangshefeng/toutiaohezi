@@ -32,23 +32,24 @@
 <script>
 import AppAside from './components/aside'
 import { getUserInfo } from '@/api/user.js'
+import globalBus from '@/util/global-bus.js'
 export default {
   name: 'layout',
   components: {
     AppAside
   },
   props: [],
-  data () {
+  data() {
     return {
       user: {}
     }
   },
   methods: {
-    async getUserProfile () {
+    async getUserProfile() {
       await getUserInfo()
       this.user = JSON.parse(sessionStorage.getItem('userInfo'))
     },
-    async onLogout () {
+    async onLogout() {
       const res = await this.$confirm('即将退出, 是否继续?', '退出提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -57,6 +58,7 @@ export default {
       console.log(res)
       if (res === 'confirm') {
         sessionStorage.removeItem('user')
+        sessionStorage.removeItem('userInfo')
         this.$router.push('/login')
       } else {
         this.$message({
@@ -66,8 +68,12 @@ export default {
       }
     }
   },
-  created () {
+  created() {
     this.getUserProfile()
+    globalBus.$on('update-user', data => {
+      this.user.name = data.name
+      this.user.photo = data.photo
+    })
   }
 }
 </script>

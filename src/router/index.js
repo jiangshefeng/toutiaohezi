@@ -32,6 +32,16 @@ const routes = [
         path: '/image',
         name: 'material',
         component: () => import('@/views/material')
+      },
+      {
+        path: '/comment',
+        name: 'comment',
+        component: () => import('@/views/comment')
+      },
+      {
+        path: '/settings',
+        name: 'settings',
+        component: () => import('@/views/setting')
       }
     ]
   }

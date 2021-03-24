@@ -29,6 +29,17 @@
           <el-radio :label="0">无图</el-radio>
           <el-radio :label="-1">自动</el-radio>
         </el-radio-group>
+        <template v-if="form.cover.type > 0">
+          <div class="cover_wrap">
+            <update-cover
+              :imageUrl="form.cover.images[index]"
+              class="cover"
+              v-for="(item, index) in form.cover.type"
+              :key="index"
+              @updateCover="onupdateCover(index, $event)"
+            ></update-cover>
+          </div>
+        </template>
       </el-form-item>
       <el-form-item label="频道" prop="channel_id">
         <el-select v-model="form.channel_id" placeholder="请选择">
@@ -50,6 +61,7 @@
   </el-card>
 </template>
 <script>
+import UpdateCover from './components/UpdateCover'
 import 'element-tiptap/lib/index.css'
 import {
   getArticleChannel,
@@ -74,11 +86,13 @@ import {
   OrderedList,
   Image
 } from 'element-tiptap'
+
 export default {
   name: 'publish',
   props: [],
   components: {
-    'el-tiptap': ElementTiptap
+    'el-tiptap': ElementTiptap,
+    UpdateCover
   },
 
   data() {
@@ -88,7 +102,7 @@ export default {
         content: '',
         cover: {
           images: [],
-          type: ''
+          type: 0
         },
         channel_id: ''
       },
@@ -211,6 +225,10 @@ export default {
       const id = this.$route.query.id
       const res = await getArticleById(id)
       this.form = res.data.data
+    },
+    // 接受图片url
+    onupdateCover(index, url) {
+      this.form.cover.images[index] = url
     }
   },
   created() {
@@ -234,4 +252,11 @@ export default {
   }
 }
 </script>
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.cover_wrap {
+  display: flex;
+}
+.cover {
+  margin: 10px;
+}
+</style>

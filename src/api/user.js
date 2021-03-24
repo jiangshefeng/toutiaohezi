@@ -37,3 +37,19 @@ export async function getUserInfo() {
   const userInfo = JSON.stringify(res.data.data)
   sessionStorage.setItem('userInfo', userInfo)
 }
+// 修改用户头像
+export function updateUserPhoto(file) {
+  return request({
+    url: '/mp/v1_0/user/photo',
+    method: 'PATCH',
+    data: file
+  })
+}
+// 修改用户信息
+export function updateUserInfo(data) {
+  return request({
+    url: '/mp/v1_0/user/profile',
+    method: 'PATCH',
+    data
+  })
+}

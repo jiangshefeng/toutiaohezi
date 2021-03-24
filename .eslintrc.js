@@ -11,6 +11,7 @@ module.exports = {
     camelcase: 0,
     'space-before-function-paren': 0,
     eqeqeq: 0,
-    'dot-notation': 0
+    'dot-notation': 0,
+    'no-unused-vars': 0
   }
 }
